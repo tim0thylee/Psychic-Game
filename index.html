@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="./assets/style.css">
+</head>
+<body>
+	<div id="game">
+
+	</div>
+	<script type="text/javascript">
+		var computerChoice = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+		var wins = 0;
+		var lose = 0;
+		var guessesLeft = 9;
+
+		var actualGuess = [];
+
+		document.onkeyup = function(event) {
+
+			var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+			var computerGuess = computerChoice[Math.floor(Math.random() * computerChoice.length)];
+
+			if(userGuess !== computerChoice) {
+				guessesLeft--
+				
+				actualGuess.push(userGuess)
+				
+			}
+			
+
+			if (userGuess === computerChoice){
+				wins++;
+				actualGuess = [];
+				guessesLeft = 9;
+				alert('winner');
+				computerGuess = computerChoice[Math.floor(Math.random() * computerChoice.length)];
+			}
+			
+			if (guessesLeft === 0){
+				lose++;
+				actualGuess = [];
+				guessesLeft = 9;
+				alert('loser');
+				computerGuess = computerChoice[Math.floor(Math.random() * computerChoice.length)];
+			}
+
+			var html =
+			"<h1>Psychic Game</h1>" +
+			"<p> Guess what letter I am thinking of.</p>" + 
+			"<p>wins: " + wins + "</p>" +
+			"<p>losses: " + lose +"</p>" + 
+			"<p>Guesses left: " + guessesLeft + "</p>" +
+			"<p>User's Guess: " + actualGuess + "</p>";
+			
+
+			document.querySelector("#game").innerHTML = html;
+
+		};
+
+	</script>
+	
+</body>
+</html>
